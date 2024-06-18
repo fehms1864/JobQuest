@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+// src/App.js
+import React, { useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import HomePage from './components/HomePage';
+import LoginPage from './components/LoginPage';
+import AddJobPage from './components/AddJobPage';
+import './styles/App.less';
 
-function App() {
+const App = () => {
+  const [jobs, setJobs] = useState([]);
+
+  const addJob = (job) => {
+    setJobs([...jobs, job]);
+  };
+
+  const deleteJob = (id) => {
+    setJobs(jobs.filter((_, index) => index !== id));
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Routes>
+        <Route path="/" element={<HomePage jobs={jobs} deleteJob={deleteJob} />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/add-job" element={<AddJobPage addJob={addJob} />} />
+      </Routes>
     </div>
   );
-}
+};
 
 export default App;

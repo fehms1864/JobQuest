@@ -1,0 +1,114 @@
+// src/styles/LoginPage.less
+@import './Header.less';
+@import './HomePage.less';
+
+.login-page {
+  .hero-section {
+    text-align: center;
+    padding: 50px 0;
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1.2em;
+      color: #666;
+    }
+  }
+
+  .login-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+
+    .back-button {
+      display: block;
+      margin-bottom: 10px;
+      text-align: left;
+      color: #333;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    .login-icon {
+      margin-bottom: 20px;
+
+      img {
+        max-width: 100px;
+      }
+    }
+
+    h3 {
+      margin-bottom: 20px;
+      font-size: 1.5em;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+
+      input {
+        margin: 10px 0;
+        padding: 10px;
+        font-size: 1em;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+
+      .login-button {
+        padding: 10px;
+        background-color: #666;
+        border: none;
+        cursor: pointer;
+        font-size: 1em;
+        color: white;
+        border-radius: 5px;
+        margin-bottom: 10px;
+
+        &:hover {
+          background-color: #555;
+        }
+      }
+
+      .signup-button {
+        padding: 10px;
+        background-color: #000;
+        border: none;
+        cursor: pointer;
+        font-size: 1em;
+        color: white;
+        border-radius: 5px;
+
+        &:hover {
+          background-color: #333;
+        }
+      }
+    }
+  }
+
+  .footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    display: flex;
+    justify-content: space-around;
+
+    div {
+      flex: 1;
+    }
+  }
+}

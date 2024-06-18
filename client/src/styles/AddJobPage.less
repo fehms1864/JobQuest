@@ -1,0 +1,124 @@
+// src/styles/AddJobPage.less
+@import './Header.less';
+@import './HomePage.less';
+
+.add-job-page {
+  .hero-section {
+    text-align: center;
+    padding: 50px 10px;
+
+    .back-button {
+      display: block;
+      margin-bottom: 20px;
+      text-align: left;
+      color: #333;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    h2 {
+      font-size: 2em;
+      margin-bottom: 10px;
+    }
+  }
+
+  .add-job-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+
+    form {
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+
+      .image-upload {
+        flex: 1;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 80px;
+        text-align: center;
+
+        label {
+          display: block;
+          cursor: pointer;
+          img {
+            max-width: 100px;
+            margin-bottom: 10px;
+          }
+          input {
+            display: none;
+          }
+        }
+
+        .image-preview {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+          img {
+            max-width: 100px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+          }
+        }
+      }
+
+      .job-details {
+        flex: 1;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 100px;
+
+        h3 {
+          margin-bottom: 20px;
+          font-size: 1.5em;
+        }
+
+        input,
+        textarea {
+          display: block;
+          width: 100%;
+          margin-bottom: 10px;
+          padding: 10px;
+          font-size: 1em;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+        }
+
+        textarea {
+          height: 100px;
+        }
+
+        .add-button {
+          padding: 10px;
+          background-color: #666;
+          border: none;
+          cursor: pointer;
+          font-size: 1em;
+          color: white;
+          border-radius: 5px;
+
+          &:hover {
+            background-color: #555;
+          }
+        }
+      }
+    }
+  }
+
+  .footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    display: flex;
+    justify-content: space-around;
+
+    div {
+      flex: 1;
+    }
+  }
+}
