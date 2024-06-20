@@ -1,0 +1,15 @@
+[build]
+  publish = "client/build"
+  command = "npm run build"
+
+[functions]
+  directory = "server"
+
+[context.production.environment]
+  MONGODB_URI = "mongodb://localhost:27017/job-app-records"
+  JWT_SECRET = "your-production-jwt-secret"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

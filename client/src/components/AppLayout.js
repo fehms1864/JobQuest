@@ -1,19 +1,16 @@
-// src/components/AppLayout.js
 import React from 'react';
-import Header from './Header';
+import { Link } from 'react-router-dom';
 import '../styles/AppLayout.less';
 
 const AppLayout = ({ children }) => {
   return (
     <div className="app-layout">
-      <Header />
       <div className="content">
         {children}
       </div>
       <footer className="footer">
-        <div>My Profile</div>
-        <div>JobTrack Community</div>
-        <div>Connect with us</div>
+        <div><Link className='link-no-underline' to='/community'>JobQuest Community</Link></div>
+        <div><Link className='link-no-underline' to='/connect'>Connect with us</Link></div>
       </footer>
     </div>
   );
