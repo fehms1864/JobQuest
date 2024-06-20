@@ -1,30 +1,32 @@
 import React from 'react';
 import '../styles/JobCard.less';
 
-const JobCard = ({ id, title, companyName, salary, status, description, onDelete, onStatusChange }) => {
+const JobCard = ({ id, title, companyName, salary, status, link, description, onDelete, onStatusChange }) => {
 
-  const getStatusClass = (status) => {
+  const getStatusColor = (status) => {
     switch (status) {
       case 'Applied':
-        return 'status-applied';
+        return '#007bff';
       case 'Rejected':
-        return 'status-rejected';
+        return '#dc3545';
       case 'Interviewing':
-        return 'status-interviewing';
+        return '#ffc107';
       case 'Offer Received':
-        return 'status-offer-received';
+        return '#28a745'; 
       case 'Accepted':
-        return 'status-accepted';
+        return '#17a2b8';
       default:
-        return '';
+        return '#6c757d';
     }
   };
 
   return (
       <div className="card mb-3">
         <div className="row no-gutters">
-          <div className="col-md-2 d-flex align-items-center justify-content-center">
+          <div className="col-md-2 d-flex align-items-center justify-content-center job-card-img-container">
+          <a href={link} target="_blank" rel="noopener noreferrer">
             <img src="../../jobCardLogo.jpeg" className="card-img" alt="Job Placeholder" />
+          </a>
           </div>
           <div className="col-md-6 d-flex align-items-center">
             <div className="card-body text-start">
@@ -36,7 +38,9 @@ const JobCard = ({ id, title, companyName, salary, status, description, onDelete
           </div>
           <div className="col-md-2 d-flex align-items-center justify-content-center">
               <select
-                className={`form-select mb-2 ${getStatusClass(status)}`}
+                id={id}
+                className='form-select'
+                style={{ backgroundColor: getStatusColor(status), color: 'white', width: 'auto' }}
                 value={status}
                 onChange={(e) => onStatusChange(id, e.target.value)}
               >
@@ -48,7 +52,7 @@ const JobCard = ({ id, title, companyName, salary, status, description, onDelete
               </select>
           </div>
 
-          <div className="col-md-1 d-flex align-items-center justify-content-center">
+          <div className="col-md-2 d-flex align-items-center justify-content-center">
               <button onClick={() => onDelete(id)} className="btn btn-danger">Delete</button>
           </div>
 

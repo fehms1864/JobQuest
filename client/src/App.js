@@ -38,7 +38,7 @@ const App = () => {
   useEffect(() => {
     const fetchUser = async () => {
       const token = Cookies.get('token');
-      console.log('token',token)
+
       if (token) {
         try {
           const response = await fetch('http://localhost:3000/api/user', {

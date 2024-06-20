@@ -57,6 +57,7 @@
 .card-img {
   max-width: 100%;
   height: auto;
+  display: block;
 }
 
 .card-body {
@@ -71,18 +72,10 @@
   margin-bottom: 0.5rem;
 }
 
-.status-applied {
-  background-color: #f0f0f0;
+.job-card-img-container {
+  transition: transform 0.3s ease-in-out;
 }
-.status-rejected {
-  background-color: #e33535; /* Light red for Rejected */
-}
-.status-interviewing {
-  background-color: #ffffcc; /* Light yellow for Interviewing */
-}
-.status-offer-received {
-  background-color: #ccffcc; /* Light green for Offer Received */
-}
-.status-accepted {
-  background-color: #cceeff; /* Light blue for Accepted */
+
+.job-card-img-container:hover {
+  transform: scale(1.05);
 }

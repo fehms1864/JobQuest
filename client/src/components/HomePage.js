@@ -104,6 +104,7 @@ const HomePage = () => {
                 companyName={job.companyName}
                 salary={job.salary}
                 status={job.status}
+                link={job.link}
                 description={job.description}
                 onDelete={handleDelete}
                 onStatusChange={handleStatusChange}
