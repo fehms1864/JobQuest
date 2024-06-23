@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import AppLayout from './AppLayout';
 import '../styles/AddJobPage.less';
@@ -9,6 +9,7 @@ import Cookies from 'js-cookie';
 const AddJobPage = () => {
   const [alertVisible, setAlertVisible] = useState(false);
   const [errorVisible, setErrorVisible] = useState(false);
+  const [countdown, setCountdown] = useState(5);
 
   const [job, setJob] = useState({
     title: '',
@@ -45,6 +46,7 @@ const AddJobPage = () => {
       .then(data => {
         console.log('Job application added:', data);
         setAlertVisible(true);
+        setCountdown(5);
         setTimeout(() => {
           setAlertVisible(false);
           navigate('/');
@@ -62,12 +64,29 @@ const AddJobPage = () => {
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    let timer;
+    if (alertVisible) {
+      timer = setInterval(() => {
+        setCountdown((prev) => {
+          if (prev === 1) {
+            clearInterval(timer);
+            setAlertVisible(false);
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+    }
+    return () => clearInterval(timer);
+  }, [alertVisible]);
+
   return (
     <AppLayout>
       <div className="add-job-page">
       {alertVisible && (
           <div className="alert alert-success" role="alert">
-            Job application added successfully!
+            Job application added successfully! This message will disappear in <strong>{countdown} seconds</strong>.
           </div>
         )}
         {errorVisible && (

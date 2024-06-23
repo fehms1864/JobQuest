@@ -1,81 +1,41 @@
-.job-card {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: row;
-  max-width: 500px;
-  overflow: hidden;
-  width: 100%;
-  margin-bottom: 20px;
-
-  .job-card-image {
-    flex: 1;
-    img {
-      display: block;
-      max-width: 100%;
-      height: auto;
-    }
-  }
-
-  .job-card-content {
-    flex: 2;
-    padding: 20px;
-    position: relative;
-
-    h3 {
-      font-size: 1.5em;
-      margin: 0 0 10px;
-    }
-
-    p {
-      color: #666;
-      font-size: 1em;
-      margin: 0 0 20px;
-    }
-
-    .delete-button {
-      position: absolute;
-      bottom: 20px;
-      right: 20px;
-      padding: 10px;
-      background-color: red;
-      color: white;
-      border: none;
-      cursor: pointer;
-      font-size: 1em;
-      border-radius: 5px;
-
-      &:hover {
-        background-color: darkred;
-      }
-    }
-  }
-}
-
-.card-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
-.card-body {
-  padding: 1rem;
-}
-
-.card-title {
-  margin-bottom: 0.5rem;
-}
-
 .card-text {
   margin-bottom: 0.5rem;
 }
 
-.job-card-img-container {
-  transition: transform 0.3s ease-in-out;
+.job-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
 }
 
-.job-card-img-container:hover {
-  transform: scale(1.05);
+.job-card-img-container {
+  padding: 0.5rem;
+  a img {
+    height: auto;
+    object-fit: contain; 
+    transition: transform 0.3s;
+    &:hover {
+      transform: scale(1.1); 
+    }
+  }
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.select-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+}
+
+.delete-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
 }
