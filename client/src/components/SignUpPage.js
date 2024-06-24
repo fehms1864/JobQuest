@@ -4,6 +4,7 @@ import '../styles/LoginPage.less';
 const SignUpPage = ({ onClose, toggleLogin }) => {
   const [signUpData, setSignUpData] = useState({ name: '', email: '', password: '' });
   const [error, setError] = useState('');
+  const [alertVisible, setAlertVisible] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -24,9 +25,12 @@ const SignUpPage = ({ onClose, toggleLogin }) => {
 
       const data = await response.json();
       if (response.ok) {
-        alert("Successfully signed up!");
-        onClose();
+        setAlertVisible(true);
+        setTimeout(() => {
+          onClose();
         toggleLogin();
+        }, 3000)
+        
       } else {
         setError(data.message);
       }
@@ -38,6 +42,11 @@ const SignUpPage = ({ onClose, toggleLogin }) => {
   return (
     <div className="login-page">
       <div className="login-container">
+      {alertVisible && (
+          <div className="alert alert-success" role="alert">
+            Successfully Signed Up! Redirecting to Login
+          </div>
+        )}
         <h2>Sign Up for JobQuest</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
