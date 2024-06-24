@@ -1,6 +1,7 @@
 const express = require('express');
 const serverless = require('serverless-http');
 
+const path = require('path');
 const app = express();
 const bodyParser = require('body-parser');
 require('dotenv').config();
@@ -28,8 +29,7 @@ app.use('/api/applications', applicationRoutes);
 //Connecting to the database
 mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
-    useUnifiedTopology: true,
-    tls: true
+    useUnifiedTopology: true
 });
 
 mongoose.connection.on('open', () => {
