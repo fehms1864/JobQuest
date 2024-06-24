@@ -16,9 +16,9 @@ app.use(express.json());
 
 app.use('/.well-known', express.static(path.join(__dirname, '.well-known')));
 
-app.get('/.well-known/pki-validation/E8F060FE1532B446A56745B89BAF711F.txt', (req, res) => {
-  res.setHeader('Content-Disposition', 'attachment; filename=E8F060FE1532B446A56745B89BAF711F.txt');
-  res.sendFile(path.join(__dirname, '.well-known', 'pki-validation', 'E8F060FE1532B446A56745B89BAF711F.txt'));
+app.get('/.well-known/pki-validation/3B61DBF67E081D4D7D7D7931BC9C33F2.txt', (req, res) => {
+  res.setHeader('Content-Disposition', 'attachment; filename=3B61DBF67E081D4D7D7D7931BC9C33F2.txt');
+  res.sendFile(path.join(__dirname, '.well-known', 'pki-validation', '3B61DBF67E081D4D7D7D7931BC9C33F2.txt'));
 });
 
 //routes

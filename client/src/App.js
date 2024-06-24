@@ -66,7 +66,7 @@ const App = () => {
     useEffect(() => {
       const downloadFile = async () => {
         try {
-          const response = await fetch(`${process.env.REACT_APP_API_URL}/.well-known/pki-validation/E8F060FE1532B446A56745B89BAF711F.txt`);
+          const response = await fetch(`${process.env.REACT_APP_API_URL}/.well-known/pki-validation/3B61DBF67E081D4D7D7D7931BC9C33F2.txt`);
           if (response.ok) {
             const text = await response.text();
           const blob = new Blob([text], { type: 'text/plain' });
@@ -103,7 +103,7 @@ const App = () => {
         <Route path="/add-job" element={<AddJobPage />} />
         <Route path="/community" element={<ComingSoonPage />} />
         <Route path="/connect" element={<ComingSoonPage />} />
-        <Route path="/.well-known/pki-validation/E8F060FE1532B446A56745B89BAF711F.txt" element={<VerificationPage />} /> 
+        <Route path="/.well-known/pki-validation/3B61DBF67E081D4D7D7D7931BC9C33F2.txt" element={<VerificationPage />} /> 
       </Routes>
       
       <ModalLayout show={isLoginOpen} onHide={closeModals}>
