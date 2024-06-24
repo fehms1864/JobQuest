@@ -62,39 +62,6 @@ const App = () => {
     fetchUser();
   }, []);
 
-  const VerificationPage = () => {
-    useEffect(() => {
-      const downloadFile = async () => {
-        try {
-          const response = await fetch(`${process.env.REACT_APP_API_URL}/.well-known/pki-validation/3B61DBF67E081D4D7D7D7931BC9C33F2.txt`);
-          if (response.ok) {
-            const text = await response.text();
-          const blob = new Blob([text], { type: 'text/plain' });
-          const url = window.URL.createObjectURL(blob);
-          const link = document.createElement('a'); 
-          link.href = url; 
-          link.setAttribute('download', 'verification.txt'); 
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-          } else {
-            console.error('Failed to verify:', response.status);
-          }
-        } catch (error) {
-          console.error('Error fetching verification file:', error);
-        }
-      };
-  
-      downloadFile();
-    }, []);
-  
-    return (
-      <div>
-        <h1>Verification Page</h1>
-      </div>
-    );
-  };
-
   return (
     <div className="App">
       <Header user={user} toggleLogin={toggleLogin} signOut={signOut} />
@@ -103,7 +70,6 @@ const App = () => {
         <Route path="/add-job" element={<AddJobPage />} />
         <Route path="/community" element={<ComingSoonPage />} />
         <Route path="/connect" element={<ComingSoonPage />} />
-        <Route path="/.well-known/pki-validation/3B61DBF67E081D4D7D7D7931BC9C33F2.txt" element={<VerificationPage />} /> 
       </Routes>
       
       <ModalLayout show={isLoginOpen} onHide={closeModals}>

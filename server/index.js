@@ -1,7 +1,6 @@
 const express = require('express');
 const serverless = require('serverless-http');
 
-const path = require('path');
 const app = express();
 const bodyParser = require('body-parser');
 require('dotenv').config();
@@ -13,13 +12,6 @@ app.use(cookieParser());
 app.use(cors());
 app.use(bodyParser.json())
 app.use(express.json());
-
-app.use('/.well-known', express.static(path.join(__dirname, '.well-known')));
-
-app.get('/.well-known/pki-validation/3B61DBF67E081D4D7D7D7931BC9C33F2.txt', (req, res) => {
-  res.setHeader('Content-Disposition', 'attachment; filename=3B61DBF67E081D4D7D7D7931BC9C33F2.txt');
-  res.sendFile(path.join(__dirname, '.well-known', 'pki-validation', '3B61DBF67E081D4D7D7D7931BC9C33F2.txt'));
-});
 
 //routes
 const authRoutes = require('./routes/auth');
@@ -47,7 +39,6 @@ mongoose.connection.on('open', () => {
 
   const PORT = process.env.PORT || 3000;
   app.listen(PORT, () => {
-    console.log('Serving static files from:', path.join(__dirname, '.well-known'));
     console.log(`Server is running on http://localhost:${PORT}`);
   });
   
