@@ -14,7 +14,21 @@ app.use(cors());
 app.use(bodyParser.json())
 app.use(express.json());
 
-app.use('/.well-known/pki-validation/E8F060FE1532B446A56745B89BAF711F.txt', express.static(path.join(__dirname, '.well-known')));
+const fs = require('fs');
+
+const filePath = path.join(__dirname, '.well-known', 'pki-validation', 'E8F060FE1532B446A56745B89BAF711F.txt');
+
+// Route to serve the file content
+app.get('/.well-known/pki-validation/E8F060FE1532B446A56745B89BAF711F.txt', (req, res) => {
+  fs.readFile(filePath, 'utf8', (err, data) => {
+    if (err) {
+      console.error('Error reading file:', err);
+      return res.status(500).json({ error: 'Failed to read file' });
+    }
+    res.status(200).json(data);
+  });
+  return res;
+});
 
 //routes
 const authRoutes = require('./routes/auth');

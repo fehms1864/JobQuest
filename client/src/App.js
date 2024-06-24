@@ -66,17 +66,17 @@ const App = () => {
     useEffect(() => {
       const downloadFile = async () => {
         try {
-          const response = await fetch('/.well-known/pki-validation/E8F060FE1532B446A56745B89BAF711F.txt');
+          const response = await fetch('http://localhost:3000/.well-known/pki-validation/E8F060FE1532B446A56745B89BAF711F.txt');
           if (response.ok) {
-            console.log('Verification successful');
-            const blob = await response.blob(); // Get blob data from response
-            const url = window.URL.createObjectURL(new Blob([blob])); // Create object URL for blob
-            const link = document.createElement('a'); // Create a new anchor element
-            link.href = url; // Set the href attribute to the object URL
-            link.setAttribute('download', 'verification.txt'); // Set the download attribute with desired file name
-            document.body.appendChild(link); // Append the anchor element to the document body
-            link.click(); // Programmatically click the link to trigger download
-            document.body.removeChild(link); // Clean up: remove the anchor element from the document body
+            const text = await response.text(); // Get the text content of the response
+          const blob = new Blob([text], { type: 'text/plain' }); // Create a Blob with the text content
+          const url = window.URL.createObjectURL(blob); // Create object URL for blob
+          const link = document.createElement('a'); // Create a new anchor element
+          link.href = url; // Set the href attribute to the object URL
+          link.setAttribute('download', 'verification.txt'); // Set the download attribute with desired file name
+          document.body.appendChild(link); // Append the anchor element to the document body
+          link.click(); // Programmatically click the link to trigger download
+          document.body.removeChild(link); // Clean up: remove the anchor element from the document body
           } else {
             console.error('Failed to verify:', response.status);
           }
