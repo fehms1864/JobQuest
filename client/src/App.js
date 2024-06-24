@@ -41,7 +41,7 @@ const App = () => {
 
       if (token) {
         try {
-          const response = await fetch('http://localhost:3000/api/user', {
+          const response = await fetch(`${process.env.REACT_APP_API_URL}/api/user`, {
             headers: {
               'Authorization': `Token ${token}`,
               'Content-Type': 'application/json',
@@ -66,7 +66,7 @@ const App = () => {
     useEffect(() => {
       const downloadFile = async () => {
         try {
-          const response = await fetch('http://localhost:3000/.well-known/pki-validation/E8F060FE1532B446A56745B89BAF711F.txt');
+          const response = await fetch(`${process.env.REACT_APP_API_URL}/.well-known/pki-validation/E8F060FE1532B446A56745B89BAF711F.txt`);
           if (response.ok) {
             const text = await response.text(); // Get the text content of the response
           const blob = new Blob([text], { type: 'text/plain' }); // Create a Blob with the text content

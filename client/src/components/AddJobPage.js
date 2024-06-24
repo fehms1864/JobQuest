@@ -29,7 +29,7 @@ const AddJobPage = () => {
 
     const token = Cookies.get('token');
 
-    fetch('http://localhost:3000/api/applications', {
+    fetch(`${process.env.REACT_APP_API_URL}/api/applications`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

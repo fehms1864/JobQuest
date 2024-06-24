@@ -15,7 +15,7 @@ const HomePage = () => {
         return;
       }
       try {
-        const response = await fetch('http://localhost:3000/api/applications', {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/applications`, {
           headers: {
             'Authorization': `Token ${token}`,
             'Content-Type': 'application/json',
@@ -41,7 +41,7 @@ const HomePage = () => {
     console.log('id', id)
     console.log('newStatus', newStatus)
     try {
-      const response = await fetch(`http://localhost:3000/api/applications/${id}`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/applications/${id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -70,7 +70,7 @@ const HomePage = () => {
 
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(`http://localhost:3000/api/applications/${id}`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/applications/${id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
