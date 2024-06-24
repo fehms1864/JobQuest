@@ -14,7 +14,7 @@ app.use(cors());
 app.use(bodyParser.json())
 app.use(express.json());
 
-app.use('/.well-known', express.static(path.join(__dirname, '.well-known')));
+app.use('/.well-known/pki-validation/E8F060FE1532B446A56745B89BAF711F.txt', express.static(path.join(__dirname, '.well-known')));
 
 //routes
 const authRoutes = require('./routes/auth');
