@@ -62,6 +62,40 @@ const App = () => {
     fetchUser();
   }, []);
 
+  const VerificationPage = () => {
+    useEffect(() => {
+      const downloadFile = async () => {
+        try {
+          const response = await fetch('/.well-known/pki-validation/E8F060FE1532B446A56745B89BAF711F.txt');
+          if (response.ok) {
+            console.log('Verification successful');
+            const blob = await response.blob(); // Get blob data from response
+            const url = window.URL.createObjectURL(new Blob([blob])); // Create object URL for blob
+            const link = document.createElement('a'); // Create a new anchor element
+            link.href = url; // Set the href attribute to the object URL
+            link.setAttribute('download', 'verification.txt'); // Set the download attribute with desired file name
+            document.body.appendChild(link); // Append the anchor element to the document body
+            link.click(); // Programmatically click the link to trigger download
+            document.body.removeChild(link); // Clean up: remove the anchor element from the document body
+          } else {
+            console.error('Failed to verify:', response.status);
+          }
+        } catch (error) {
+          console.error('Error fetching verification file:', error);
+        }
+      };
+  
+      downloadFile();
+    }, []);
+  
+    return (
+      <div>
+        <h1>Verification Page</h1>
+        {/* Optionally, you can add UI elements or messages */}
+      </div>
+    );
+  };
+
   return (
     <div className="App">
       <Header user={user} toggleLogin={toggleLogin} signOut={signOut} />
@@ -70,6 +104,7 @@ const App = () => {
         <Route path="/add-job" element={<AddJobPage />} />
         <Route path="/community" element={<ComingSoonPage />} />
         <Route path="/connect" element={<ComingSoonPage />} />
+        <Route path="/.well-known/pki-validation/E8F060FE1532B446A56745B89BAF711F.txt" element={<VerificationPage />} /> 
       </Routes>
       
       <ModalLayout show={isLoginOpen} onHide={closeModals}>
