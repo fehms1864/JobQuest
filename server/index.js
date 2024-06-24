@@ -14,20 +14,11 @@ app.use(cors());
 app.use(bodyParser.json())
 app.use(express.json());
 
-const fs = require('fs');
+app.use('/.well-known', express.static(path.join(__dirname, '.well-known')));
 
-const filePath = path.join(__dirname, '.well-known', 'pki-validation', 'E8F060FE1532B446A56745B89BAF711F.txt');
-
-// Route to serve the file content
 app.get('/.well-known/pki-validation/E8F060FE1532B446A56745B89BAF711F.txt', (req, res) => {
-  fs.readFile(filePath, 'utf8', (err, data) => {
-    if (err) {
-      console.error('Error reading file:', err);
-      return res.status(500).json({ error: 'Failed to read file' });
-    }
-    res.status(200).json(data);
-  });
-  return res;
+  res.setHeader('Content-Disposition', 'attachment; filename=E8F060FE1532B446A56745B89BAF711F.txt');
+  res.sendFile(path.join(__dirname, '.well-known', 'pki-validation', 'E8F060FE1532B446A56745B89BAF711F.txt'));
 });
 
 //routes
@@ -56,6 +47,7 @@ mongoose.connection.on('open', () => {
 
   const PORT = process.env.PORT || 3000;
   app.listen(PORT, () => {
+    console.log('Serving static files from:', path.join(__dirname, '.well-known'));
     console.log(`Server is running on http://localhost:${PORT}`);
   });
   
