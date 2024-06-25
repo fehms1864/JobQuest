@@ -58,6 +58,7 @@ const SignUpPage = ({ onClose, toggleLogin }) => {
               className="form-control"
               placeholder="Full Name"
               required
+              autoComplete="off"
             />
           </div>
           <div className="form-group">
@@ -69,6 +70,7 @@ const SignUpPage = ({ onClose, toggleLogin }) => {
               className="form-control"
               placeholder="Email"
               required
+              autoComplete="off"
             />
           </div>
           <div className="form-group">
@@ -80,6 +82,7 @@ const SignUpPage = ({ onClose, toggleLogin }) => {
               className="form-control"
               placeholder="Password"
               required
+              autoComplete="off"
             />
           </div>
           <button type="submit" className="btn btn-success btn-block">Sign Up</button>
