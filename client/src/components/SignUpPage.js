@@ -48,7 +48,7 @@ const SignUpPage = ({ onClose, toggleLogin }) => {
           </div>
         )}
         <h2>Sign Up for JobQuest</h2>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} autoComplete="off">
           <div className="form-group">
             <input
               type="text"

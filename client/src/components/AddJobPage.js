@@ -10,6 +10,7 @@ const AddJobPage = () => {
   const [alertVisible, setAlertVisible] = useState(false);
   const [errorVisible, setErrorVisible] = useState(false);
   const [countdown, setCountdown] = useState(5);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const [job, setJob] = useState({
     title: '',
@@ -38,6 +39,12 @@ const AddJobPage = () => {
       body: JSON.stringify(job)
     })
       .then(response => {
+        if(response.status === 401) {
+          setErrorMessage("Please Log in / Sign up to add a job");
+        }
+        else {
+          setErrorMessage('Something went wrong! Please make sure you are logged in or refresh and try again!');
+        }
         if (!response.ok) {
           throw new Error('Something went wrong with the Error Please Try again!');
         }
@@ -57,7 +64,7 @@ const AddJobPage = () => {
         setErrorVisible(true);
           setTimeout(() => {
             setErrorVisible(false);
-          }, 5000);
+          }, 7000);
       });
 
   };
@@ -91,7 +98,7 @@ const AddJobPage = () => {
         )}
         {errorVisible && (
           <div className="alert alert-danger" role="alert">
-            Something went wrong! Please make sure you are logged in or refresh and try again!
+            {errorMessage}
           </div>
         )}
         <div className="hero-section">
