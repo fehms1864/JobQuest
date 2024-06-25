@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import HomePage from './components/HomePage';
-import AddJobPage from './components/AddJobPage';
+import HomePage from './views/HomePage';
+import AddJobPage from './views/AddJobPage';
 import Header from './components/Header';
 import ModalLayout from './components/ModalLayout';
-import LoginPage from './components/LoginPage';
-import SignUpPage from './components/SignUpPage';
+import LoginPage from './views/LoginPage';
+import SignUpPage from './views/SignUpPage';
 import './styles/App.less';
-import ComingSoonPage from './components/ComingSoonPage';
+import ComingSoonPage from './views/ComingSoonPage';
 import Cookies from 'js-cookie';
 
 const App = () => {

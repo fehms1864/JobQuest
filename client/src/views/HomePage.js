@@ -1,6 +1,6 @@
 import React, {useState, useEffect } from 'react';
-import AppLayout from './AppLayout';
-import JobCard from './JobCard';
+import AppLayout from '../components/AppLayout';
+import JobCard from '../components/JobCard';
 import Cookies from 'js-cookie';
 import '../styles/HomePage.less';
 
