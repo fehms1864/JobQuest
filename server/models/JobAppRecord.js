@@ -35,6 +35,7 @@ const JobAppRecordSchema = new Schema({
     ref: 'User',
     required: true,
   },
+  deleted: { type: Boolean, default: false }, 
 });
 
 module.exports = mongoose.model('JobAppRecord', JobAppRecordSchema);

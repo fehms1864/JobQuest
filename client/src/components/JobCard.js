@@ -2,7 +2,12 @@ import React from 'react';
 import { getStatusColor } from '../util';
 import '../styles/JobCard.less';
 
-const JobCard = ({ id, title, companyName, salary, status, link, description, onDelete, onStatusChange }) => {
+const JobCard = ({ id, title, companyName, salary, status, link, description, onDelete, onRestore, onStatusChange, isDeleted }) => {
+
+  const deleteButtonText = isDeleted ? "Restore" : "Delete";
+  const handleDeleteOrRestore = (id) => {
+    return isDeleted ? onRestore(id) : onDelete(id);
+  } 
 
   return (
       <div className="card mb-4 job-card">
@@ -23,10 +28,11 @@ const JobCard = ({ id, title, companyName, salary, status, link, description, on
           <div className="col-md-2 select-container">
               <select
                 id={id}
-                className={`form-select ${getStatusColor(status)}`}
+                className={`form-select ${isDeleted ? 'btn btn-secondary disabled' : getStatusColor(status)}`}
                 style={{ color: 'white', width: '10rem', overflow: 'hidden', textWrap: "nowrap" }}
                 value={status}
                 onChange={(e) => onStatusChange(id, e.target.value)}
+                disabled={isDeleted}
               >
                 <option value="Applied">Applied</option>
                 <option value="Rejected">Rejected</option>
@@ -37,7 +43,7 @@ const JobCard = ({ id, title, companyName, salary, status, link, description, on
           </div>
 
           <div className="col-md-2 delete-container">
-              <button onClick={() => onDelete(id)} className="btn btn-danger">Delete</button>
+              <button onClick={() => handleDeleteOrRestore(id)} className="btn btn-danger">{deleteButtonText}</button>
           </div>
 
         </div>

@@ -62,10 +62,10 @@ try {
 });
 
 // Delete the record
-router.delete('/:id', authMiddleware, async (req, res) => {
+router.patch('/:id/delete', authMiddleware, async (req, res) => {
 const { id } = req.params;
 try {
-  const application = await JobAppRecord.findOneAndDelete({ _id: id, user: req.user._id });
+  const application = await JobAppRecord.findOneAndUpdate({ _id: id, user: req.user._id }, {deleted: true}, {new: true});
   if (!application) {
     return res.status(404).json({ message: 'Job application not found' });
   }
@@ -75,5 +75,20 @@ try {
   return res.status(500).json({ message: 'Server error' });
 }
 });
+
+// Restore Deleted record
+router.patch('/:id/restore', authMiddleware, async (req, res) => {
+  const { id } = req.params;
+  try {
+    const application = await JobAppRecord.findOneAndUpdate({ _id: id, user: req.user._id }, {deleted: false}, {new: true});
+    if (!application) {
+      return res.status(404).json({ message: 'Job application not found' });
+    }
+  
+    return res.status(200).json({ message: 'Job application deleted successfully' });
+  } catch (err) {
+    return res.status(500).json({ message: 'Server error' });
+  }
+  });
 
 module.exports = router;

@@ -70,8 +70,8 @@ const HomePage = () => {
 
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/applications/${id}`, {
-        method: 'DELETE',
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/applications/${id}/delete`, {
+        method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Token ${token}`,
@@ -87,7 +87,30 @@ const HomePage = () => {
     }
   }
 
-  const filteredJobs = filter === 'All' ? jobs : jobs.filter((job) => job.status === filter);
+  const handleRestore = async (id) => {
+    try {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/applications/${id}/restore`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Token ${token}`,
+        },
+      });
+      if (response.ok) {
+        window.location.reload();
+      } else {
+        console.error('Failed to restore job application record');
+      }
+    } catch (error) {
+      console.error('Error restoring job application record:', error);
+    }
+  }
+
+  const filteredJobs = filter === 'All' ? 
+    jobs.filter((job) => job.deleted === false) : 
+    filter === "Deleted" ? 
+    jobs.filter(job => job.deleted === true) :
+    jobs.filter((job) => job.status === filter && job.deleted === false);
 
 
   return (
@@ -106,6 +129,7 @@ const HomePage = () => {
             <button type="button" className={`btn btn-outline-warning ${filter === 'Interviewing' ? 'active' : ''}`} onClick={() => setFilter('Interviewing')}>Interviewing</button>
             <button type="button" className={`btn btn-outline-success ${filter === 'Offer Received' ? 'active' : ''}`} onClick={() => setFilter('Offer Received')}>Offer Received</button>
             <button type="button" className={`btn btn-outline-info ${filter === 'Accepted' ? 'active' : ''}`} onClick={() => setFilter('Accepted')}>Accepted</button>
+            <button type="button" className={`btn btn-outline-secondary ${filter === 'Deleted' ? 'active' : ''}`} onClick={() => setFilter('Deleted')}>Deleted</button>
           </div>
         </div> : null}
         <div className="job-list">
@@ -121,6 +145,8 @@ const HomePage = () => {
                 link={job.link}
                 description={job.description}
                 onDelete={handleDelete}
+                onRestore={handleRestore}
+                isDeleted={job.deleted}
                 onStatusChange={handleStatusChange}
               />
             ))
